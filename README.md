@@ -38,8 +38,7 @@ Upon execution it prints out a table with the following form:
 	          spreadsheet software with 20,000 digit numbers :)
 	Additional Columns: The computed modulo of the row's Fibonacci value.
 
-	--
-
+## In-app Help
 	   Command Line Arguments:
 	 --------------------------------
 	 -h                         Show the CSV Header
