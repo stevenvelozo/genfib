@@ -91,6 +91,7 @@ and the first ten integers:
 #### Some Basic Parameters
 If we want to see the values for each, and a header, we could execute the
 following:
+
 	$ ./genfib -o -a -d -h
 	Ordinal,Value,1,2,3,4,5,6,7,8,9,10
 	,,1,1,2,3,5,8,13,21,34,55
@@ -108,6 +109,7 @@ following:
 #### Different Sets
 Let's say we want to see the intersection between the Lucas set (rows) and
 the Fibonacci set (columns):
+
 	./genfib -o -a -d -h -R 2 -C 1
 	Ordinal,Value,1,2,3,4,5,6,7,8,9,10
 	,,1,1,2,3,5,8,13,21,34,55
@@ -126,6 +128,7 @@ the Fibonacci set (columns):
 And let's say we want to see the same intersection between the Lucas set
 (rows) and the Fibonacci set (columns), but would like 15 row values and
 8 columns:
+
 	$ ./genfib -o -a -d -h -R 2 -C 1 -r 15 -c 8
 	Ordinal,Value,1,2,3,4,5,6,7,8
 	,,1,1,2,3,5,8,13,21
@@ -149,6 +152,7 @@ And let's say we want to see the same intersection between the Lucas set
 Maybe we decide we want to load this in Excel/Matlab/Maple/Sage and so
 only need the data set... we could just run the following and pipe it to
 a .csv file or directly script it into our math application:
+
 	./genfib -R 2 -C 1 -r 15 -c 15
 	0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 	1,1,2,0,2,2,1,0,1,1,2,0,2,2,1
@@ -169,6 +173,7 @@ a .csv file or directly script it into our math application:
 #### Changing the Intersection Operation
 Lastly we would like to see the intersection operation be subtract rather
 than modulo:
+
 	$ ./genfib -R 2 -C 1 -r 15 -c 15 -I 5
 	0,0,1,2,4,7,12,20,33,54,88,143,232,376,609
 	-2,-2,-1,0,2,5,10,18,31,52,86,141,230,374,607
@@ -196,6 +201,7 @@ may be useful when run from another terminal in the same folder:
 $ tail -f Table.csv |sed 's/\([0-9]*\),\([0-9]*\),.*/Ordinal: \1 (\2 digits)/'
 
 This will output the following:
+
 	Ordinal: 1 (1 digits)
 	Ordinal: 2 (1 digits)
 	...
@@ -205,6 +211,7 @@ And will continue to output lines until the command completes.
 
 ## A Note on libpng (which is a PITA)
 Info From Saphrosit on Stack Exchange (w/r/t libpng):
+
 	OS/X problems solved with a manual installation of libpng:
 
 	download the source from official web site
