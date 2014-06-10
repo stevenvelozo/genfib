@@ -1,4 +1,4 @@
-Mathematical Set Intersection Software: genfib
+genfib: Numeric Set Intersection
 ======
 
 This application generates a 2 dimensional table of numbers based on the
