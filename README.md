@@ -1,10 +1,5 @@
-  ____ _____ _   _ _____ ___ ____
- / ___| ____| \ | |  ___|_ _| __ )
-| |  _|  _| |  \| | |_   | ||  _ \
-| |_| | |___| |\  |  _|  | || |_) |
- \____|_____|_| \_|_|   |___|____/                                version 0.1
-
- =============================================================================
+Mathematical Set Intersection Software: genfib
+======
 
 This application generates a 2 dimensional table of numbers based on the
 Fibonacci sequence and a modulus table for each value.
@@ -24,63 +19,62 @@ Mountain Lion machine, using the "brew" installed GNU MP.
 
 The code is pure C, only using std libs.
 
-Upon execution it prints out the following table:
+## Running the Application
+Upon execution it prints out a table with the following form:
 
---
+	Column 0: Ordinal of the value, which is the n in f(n) when computing the
+	          Fibonacci value.
+	Column 1: Size in base10 of the value, which is the number of digits in
+	          the Fibonacci value.
+	Column 2: The Fibonacci value for said ordinal.  This column is optional; to
+	          disable the printing of this column you send the optional "n"
+	          parameter on the command line (e.g. "genfib 10 10 n").  It was made
+	          optional because at very high ordinals, Fibonacci numbers begin to
+	          have tens of thousands of digits.  Although the GNU MP arbitrary
+	          precision math library is extremely fast at working with massive
+	          numbers, it takes the computer a lot of time to convert them to
+	          strings and display/spool them to disk.  Plus the comma separated
+	          table which is generated cannot be loaded into traditional
+	          spreadsheet software with 20,000 digit numbers :)
+	Additional Columns: The computed modulo of the row's Fibonacci value.
 
-Column 0: Ordinal of the value, which is the n in f(n) when computing the
-          Fibonacci value.
-Column 1: Size in base10 of the value, which is the number of digits in
-          the Fibonacci value.
-Column 2: The Fibonacci value for said ordinal.  This column is optional; to
-          disable the printing of this column you send the optional "n"
-          parameter on the command line (e.g. "genfib 10 10 n").  It was made
-          optional because at very high ordinals, Fibonacci numbers begin to
-          have tens of thousands of digits.  Although the GNU MP arbitrary
-          precision math library is extremely fast at working with massive
-          numbers, it takes the computer a lot of time to convert them to
-          strings and display/spool them to disk.  Plus the comma separated
-          table which is generated cannot be loaded into traditional
-          spreadsheet software with 20,000 digit numbers :)
-Additional Columns: The computed modulo of the row's Fibonacci value.
+	--
 
---
+	   Command Line Arguments:
+	 --------------------------------
+	 -h                         Show the CSV Header
+	 -a                         Show Column Value
+	 -d                         Show Row Value
+	 -s                         Show the Approximate Number of Characters
+	 -o                         Show the Ordinal
+	 -r [number]                Show [number] Rows (default 10)
+	 -R [iteration_number]      Use [iteration_number] Algorithm for Row Values
+	 -c [number]                Show [number] Columns (default 10)
+	 -C [iteration_number]      Use [iteration_number] Algorithm for Column Values
+	 -I [computation_style]     Use [computation_style] for Intersections
+	 -i [file_name]             Create a png image of the set called [file_name]
+	 -?                         Show help
 
-   Command Line Arguments:
- --------------------------------
- -h                         Show the CSV Header
- -a                         Show Column Value
- -d                         Show Row Value
- -s                         Show the Approximate Number of Characters
- -o                         Show the Ordinal
- -r [number]                Show [number] Rows (default 10)
- -R [iteration_number]      Use [iteration_number] Algorithm for Row Values
- -c [number]                Show [number] Columns (default 10)
- -C [iteration_number]      Use [iteration_number] Algorithm for Column Values
- -I [computation_style]     Use [computation_style] for Intersections
- -i [file_name]             Create a png image of the set called [file_name]
- -?                         Show help
+	   Iteration Styles:
+	 -------------------------------
+	 1 . . . . . . . . . . Fibonacci
+	 2 . . . . . . . . . . . . Lucas
+	 3 . . . . . . . . . Incremental
+	 4 . . . . . . . . . . . Padovan
+	 5 . . . . . . . . . . . .  Pell
 
-   Iteration Styles:
- -------------------------------
- 1 . . . . . . . . . . Fibonacci
- 2 . . . . . . . . . . . . Lucas
- 3 . . . . . . . . . Incremental
- 4 . . . . . . . . . . . Padovan
- 5 . . . . . . . . . . . .  Pell
+	   Computation Styles:
+	 -------------------------------
+	 1 . . . . . . . . . . .  Modulo
+	 2 . . . . . . . . . . .  Divide
+	 3 . . . . . . . . . .  Multiply
+	 4 . . . . . . . . . . . . . Add
+	 5 . .. . . . . . . . . Subtract
 
-   Computation Styles:
- -------------------------------
- 1 . . . . . . . . . . .  Modulo
- 2 . . . . . . . . . . .  Divide
- 3 . . . . . . . . . .  Multiply
- 4 . . . . . . . . . . . . . Add
- 5 . .. . . . . . . . . Subtract
 
---
-
+## Examples
 For example, the executing without parameters returns a table of the
-intersection between the first ten numbers in the Fibonacci Sequence
+intersecting modulus between the first ten numbers in the Fibonacci Sequence
 and the first ten integers:
 
 	$ ./genfib
@@ -95,6 +89,7 @@ and the first ten integers:
 	1,1,2,3,5,8,4,3,7,1
 	1,1,2,3,5,8,3,1,4,5
 
+#### Some Basic Parameters
 If we want to see the values for each, and a header, we could execute the
 following:
 	$ ./genfib -o -a -d -h
@@ -111,6 +106,7 @@ following:
 	9,9,1,1,2,3,5,8,4,3,7,1
 	10,10,1,1,2,3,5,8,3,1,4,5
 
+#### Different Sets
 Let's say we want to see the intersection between the Lucas set (rows) and
 the Fibonacci set (columns):
 	./genfib -o -a -d -h -R 2 -C 1
@@ -127,6 +123,7 @@ the Fibonacci set (columns):
 	9,76,1,1,2,3,5,8,13,21,34,55
 	10,123,1,1,2,3,5,8,13,21,34,55
 
+#### Changing the Shape of the Output
 And let's say we want to see the same intersection between the Lucas set
 (rows) and the Fibonacci set (columns), but would like 15 row values and
 8 columns:
@@ -149,6 +146,7 @@ And let's say we want to see the same intersection between the Lucas set
 	14,843,1,1,2,3,5,8,13,21
 	15,1364,1,1,2,3,5,8,13,21
 
+#### Using Other Tools
 Maybe we decide we want to load this in Excel/Matlab/Maple/Sage and so
 only need the data set... we could just run the following and pipe it to
 a .csv file or directly script it into our math application:
@@ -169,6 +167,7 @@ a .csv file or directly script it into our math application:
 	1,1,2,3,5,8,13,21,34,55,89,144,233,377,610
 	1,1,2,3,5,8,13,21,34,55,89,144,233,377,610
 
+#### Changing the Intersection Operation
 Lastly we would like to see the intersection operation be subtract rather
 than modulo:
 	$ ./genfib -R 2 -C 1 -r 15 -c 15 -I 5
@@ -188,8 +187,7 @@ than modulo:
 	-842,-842,-841,-840,-838,-835,-830,-822,-809,-788,-754,-699,-610,-466,-233
 	-1363,-1363,-1362,-1361,-1359,-1356,-1351,-1343,-1330,-1309,-1275,-1220,-1131,-987,-754
 
---
-
+## Spooling to a File
 The best use of this application is spooling output to a file:
 $ ./genfib 10000 1000 n > Table.csv
 
@@ -206,31 +204,28 @@ This will output the following:
 
 And will continue to output lines until the command completes.
 
---
+## A Note on libpng (which is a PITA)
+Info From Saphrosit on Stack Exchange (w/r/t libpng):
+	OS/X problems solved with a manual installation of libpng:
 
-From Saphrosit on Stack Exchange:
+	download the source from official web site
+	in Terminal, go in the downloaded folder and launch
 
- solved with a manual installation of libpng:
+	cp ./scripts/makefile.darwin makefile
+	make
+	sudo make install
+	make clean
+	if it doesn't work (as in my case) open makefile with TextEdit (or equivalent) and change line
 
-download the source from official web site
-in Terminal, go in the downloaded folder and launch
+	ARCH="-arch i386 -arch x86_64"
 
-cp ./scripts/makefile.darwin makefile
-make
-sudo make install
-make clean
-if it doesn't work (as in my case) open makefile with TextEdit (or equivalent) and change line
+	in
 
-ARCH="-arch i386 -arch x86_64"
+	ARCH=-arch x86_64
 
-in
+	(assuming, of course, your system is 64 bit).
 
-ARCH=-arch x86_64
-
-(assuming, of course, your system is 64 bit).
-
---
-
+## License
 The genfib application is released under the MIT license:
 
 Copyright (c) 2013 Steven Velozo (steven@velozo.com)
