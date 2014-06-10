@@ -1,0 +1,7 @@
+2014-05-07: SV: Took libpng out of the source tree -- using the homebrew version now.  Feel free to point to a
+                different png.h at your own peril.
+2013-02-05: SV: Created stock Makefile.am, configure.ac and other autoconf files
+                Wrote source code for both the thread-safe string printing library as well as the main application
+                Wrote initial simple algorithm (did not use thred-safe string printing for everything)
+2013-02-06: SV: Implemented 4 more algorithms, created adapative intersection operation
+                Created documentation and sample executions
